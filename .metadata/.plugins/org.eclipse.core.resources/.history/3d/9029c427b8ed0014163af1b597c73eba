@@ -1,0 +1,11 @@
+/**
+ * This class puts the entire game together.
+ * @author Jacob Valdiviez
+ *
+ */
+public class DirectionRunner {
+	public static void main(String[] args){
+		
+	}
+
+}

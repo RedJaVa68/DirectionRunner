@@ -1,0 +1,16 @@
+
+import javax.swing.JApplet;
+
+/**
+ * This class is the main class that handles everything
+ * @author Jacob Valdiviez
+ *
+ */
+public class MainActivity extends JApplet{
+	public void init(){
+		DirectionRunner directionRunner = new DirectionRunner("Jacob");
+		BoardView boardview = new BoardView(directionRunner.getGame());
+		boardview.initialize();
+		add(boardview);
+	}
+}

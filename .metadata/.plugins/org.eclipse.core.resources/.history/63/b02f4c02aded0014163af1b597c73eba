@@ -1,0 +1,40 @@
+
+public class GameManager {
+	private Board board;
+	private Clock clock;
+	private DirectionBoard directionBoard;
+	private int points;
+	
+	public GameManager(String name, int points, int minutes, int seconds){
+		this.points = points;
+		this.board = new Board(new Player(name),7,5);
+		this.clock = new Clock(minutes, seconds);
+		this.directionBoard = new DirectionBoard(5);
+	}
+	
+	public void initialize(){
+		Thread clockThread = new Thread(clock);
+		clockThread.start();
+		Cell[][] newCells = new Cell[this.board.getRows()][this.board.getColumns()];
+		for(int i = 0; i < newCells.length; i ++){
+			for(int j = 0; j < newCells[i].length; j ++){
+				
+			}
+		}
+	}
+	
+	public void movePlayer(int x, int y){
+		if(this.board.inBoundary(x, y)){
+			this.board.getPlayer().setX(x);
+			this.board.getPlayer().setY(y);
+		}
+	}
+	
+	public int getPlayerX(){
+		return this.board.getPlayer().getX();
+	}
+	
+	public int getPlayerY(){
+		return this.board.getPlayer().getY();
+	}
+}

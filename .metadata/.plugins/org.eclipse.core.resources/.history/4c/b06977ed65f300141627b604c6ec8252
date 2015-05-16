@@ -1,0 +1,29 @@
+import java.util.Random;
+
+/**
+ * This class is the class that contains the winning moves for every game
+ * @author Jacob Valdiviez
+ *
+ */
+public class AnswerKey {
+	Object[] answers;
+	Cell[] ans1;
+	Cell[] ans2;
+	Cell[] ans3;
+	Cell[] ans4;
+	Cell[] ans5;
+	
+	public AnswerKey(){
+		
+	}
+	/**
+	 * Randomly chooses an answer key;
+	 * @return
+	 */
+	public Cell[] getRandomKey(){
+		Random rand = new Random();
+		int number = rand.nextInt(answers.length);
+		return (Cell[]) answers[number];
+	}
+
+}

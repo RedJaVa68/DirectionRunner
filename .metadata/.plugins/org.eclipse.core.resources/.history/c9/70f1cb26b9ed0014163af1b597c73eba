@@ -1,0 +1,49 @@
+/**
+ * This class puts the entire game together.
+ * @author Jacob Valdiviez
+ *
+ */
+public class DirectionRunner {
+	/**
+	 * This field contains the user of the user who is playing
+	 */
+	private User user;
+	/**
+	 * This field contains the game handler
+	 */
+	private GameManager game;
+	/**
+	 * This field checks whether the user lost or won
+	 */
+	private boolean lost;
+	/**
+	 * Instantiates the class with a given username
+	 * @param name
+	 */
+	public DirectionRunner(String name){
+		this.user = new User(name);
+		this.lost = false;
+		this.game = new GameManager(name,5,0);
+	}
+	/**
+	 * Plays the game
+	 */
+	public void playGame(){
+		while(!this.game.getClock().timeRunOut()){
+			if((this.game.getBoard().getPlayer().getX() == this.game.getBoard().getRows()) && (this.game.getBoard().getPlayer().getY() == this.game.getBoard().getColumns())){
+				this.user.setScore(this.user.getScore() + 1000 + (this.user.getLevel() * 35));
+				this.user.levelUp();
+			}
+		}
+		this.lost = true;
+	}
+	/**
+	 * Returns whether the player lost or not
+	 * @return
+	 */
+	public boolean lost(){
+		return this.lost;
+	}
+ 
+
+}

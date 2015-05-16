@@ -1,0 +1,101 @@
+package edu.utep.cs.cs4330.DirectionRunner;
+
+
+import java.awt.Container;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+/**
+ * This class contains the Board UI
+ * @author Jacob Valdiviez
+ *
+ */
+public class BoardView extends JPanel{
+	/**
+	 * This contains the cells to display
+	 */
+	private JLabel[][] cells;
+	/**
+	 * This contains the game
+	 */
+	private GameManager game;
+	/**
+	 * This checks whether the state of the game is to initialize
+	 */
+	private boolean init;
+	/**
+	 * Instantiates the class with a given game
+	 * @param game
+	 * @see GameManager
+	 */
+	public BoardView(GameManager game){
+		this.game = game;
+		this.cells = new JLabel[this.game.getBoard().getRows()][this.game.getBoard().getColumns()];
+	}
+	/**
+	 * This method initializes the board display
+	 */
+	public void initialize(){
+		setLayout(new GridLayout(this.cells.length,this.cells[0].length));
+		this.init = true;
+		update();
+		this.init = false;
+	}
+	/**
+	 * This method updates the board display
+	 */
+	public void update(){
+		if(!init)
+			removeAll();
+		Board temp = this.game.getBoard();
+		///
+		System.out.println("Board: X:"+this.game.getPlayerX()+" Y:"+this.game.getPlayerY());
+		int x = temp.getCells().length - 1;
+		for(int i = 0; i < temp.getCells().length; i ++){
+			for(int j = 0; j < temp.getCells()[i].length; j ++){
+				this.cells[x][j] = new JLabel();
+				if((temp.getCells()[i][j].getX() == this.game.getPlayerX())&&(temp.getCells()[i][j].getY() == this.game.getPlayerY())){
+					///
+					System.out.println("Board Cell: X:"+temp.getCells()[i][j].getX() +" Y:"+temp.getCells()[i][j].getY());
+					
+					this.cells[x][j].setIcon(new ImageIcon("C:\\Users\\Jacob\\Pictures\\DirectionRunnerGame\\cell.png"));
+				}
+				else{
+					this.cells[x][j].setIcon(new ImageIcon("C:\\Users\\Jacob\\Pictures\\DirectionRunnerGame\\cell2.png"));
+				}
+			}
+			x --;
+		}
+		print();
+		setVisible(true);
+	}
+	/**
+	 * This method removes all cells from the board display
+	 */
+	public void removeAll(){
+		for(int i = 0; i < this.cells.length;i++){
+			for(int j = 0; j < this.cells[i].length;j++){
+				remove(this.cells[i][j]);
+			}
+		}
+	}
+	/**
+	 * This method prints all cells onto the board display
+	 */
+	public void print(){
+		for(int i = 0; i < this.cells.length; i++){
+			for(int j = 0; j < this.cells[i].length; j ++){
+				add(this.cells[i][j]);
+			}
+		}
+	}
+	
+	public void setGame(GameManager game){
+		this.game = game;
+	}
+}

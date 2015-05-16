@@ -1,0 +1,71 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * This class is the class that contains the winning moves for every game
+ * @author Jacob Valdiviez
+ *
+ */
+public class AnswerKey {
+	Object[] answers;
+	Cell[] ans3;
+	Cell[] ans4;
+	Cell[] ans5;
+	int[][] ans1 = {{0,0,0,0,1},
+			        {0,0,0,0,1},
+			        {0,0,0,0,1},
+			        {0,0,0,0,1},
+			        {0,0,0,0,1},
+			        {0,0,0,0,1},
+			        {1,1,1,1,1}};
+	int[][] ans2 = {{0,0,0,0,1},
+	         		{0,0,0,0,1},
+	         		{0,0,0,0,1},
+	         		{0,0,0,0,1},
+	         		{0,0,0,0,1},
+	         		{0,0,0,0,1},
+	         		{1,1,1,1,1}};
+	public AnswerKey(){
+		answers = new Object[5];
+		answers[0] = convertToCellArray(ans1);
+		answers[1] = ans2;
+		answers[2] = ans3;
+		answers[3] = ans4;
+		answers[4] = ans5;
+	}
+	/**
+	 * Randomly chooses an answer key;
+	 * @return Cell[]
+	 * @see Cell
+	 */
+	public Cell[] getRandomKey(){
+		Random rand = new Random();
+		int number = rand.nextInt(answers.length);
+		return (Cell[]) answers[number];
+	}
+	/**
+	 * Converts an array of integers into an array of cells with directions
+	 * @param intAns
+	 * @return Cell[]
+	 * @see Cell
+	 */
+	private Cell[] convertToCellArray(int[][] intAns){
+		List<Cell> cellList = new ArrayList<Cell>();
+		int tempX = 0;
+		int tempY = 0;
+		while(tempX != 6 && tempY != 4){
+			if(((tempX + 1) < intAns.length) && (intAns[tempX + 1][tempY] == 1)){
+				cellList.add(new Cell(new Direction("right"),tempX++,tempY));
+			}
+			else if(((tempY + 1) < intAns[0].length) && (intAns[tempX][tempY + 1] == 1)){
+				cellList.add(new Cell(new Direction("up"),tempX,tempY++));
+			}
+		}
+		Cell[] answer = new Cell[cellList.size()];
+		for(int i = 0; i < cellList.size(); i ++)
+			answer[i] = cellList.get(i);
+		return answer;
+	}
+
+}

@@ -1,0 +1,78 @@
+/**
+ * This stores information of the user
+ * @author Jacob Valdiviez
+ *
+ */
+public class User {
+	/**
+	 * This field contains the user name
+	 */
+	private String username;
+	/**
+	 * This field contains the score of the user
+	 */
+	private int score;
+	/**
+	 * This field contains the level of where the user is in
+	 */
+	private int level;
+	/**
+	 * This instantiates the class with a give user name
+	 * @param username
+	 */
+	public User(String username){
+		this.username = username;
+		this.score = 0;
+		this.level = 1;
+	}
+	/**
+	 * Returns the user name
+	 * @return String
+	 */
+	public String getUsername(){
+		return this.username;
+	}
+	/**
+	 * Returns the current score of the user
+	 * @return int
+	 */
+	public int getScore(){
+		return this.score;
+	}
+	/**
+	 * Returns the level the user is currently in
+	 * @return int
+	 */
+	public int getLevel(){
+		return this.level;
+	}
+	/**
+	 * Sets the score of the user given an integer
+	 * @param score
+	 */
+	public void setScore(int score){
+		this.score = score;
+	}
+	/**
+	 * Sets the level of the user to a given level
+	 * @param level
+	 */
+	public void setLevel(int level){
+		this.level = level;
+	}
+	/**
+	 * Increments the users level by one
+	 */
+	public void levelUp(){
+		this.level ++;
+	}
+	/**
+	 * Sets the user name to a given user name
+	 * @param username
+	 */
+	public void setUsername(String username){
+		this.username = username;
+	}
+	
+
+}

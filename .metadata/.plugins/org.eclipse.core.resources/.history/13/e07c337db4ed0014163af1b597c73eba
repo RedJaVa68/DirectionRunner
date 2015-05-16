@@ -1,0 +1,40 @@
+
+public class User {
+	private String username;
+	
+	private int score;
+	
+	private int level;
+	
+	public User(String username){
+		this.username = username;
+		this.score = 0;
+		this.level = 1;
+	}
+	
+	public String getUsername(){
+		return this.username;
+	}
+	
+	public int getScore(){
+		return this.score;
+	}
+	
+	public int getLevel(){
+		return this.level;
+	}
+	
+	public void setScore(int score){
+		this.score = score;
+	}
+	
+	public void setLevel(int level){
+		this.level = level;
+	}
+	
+	public void levelUp(){
+		this.level ++;
+	}
+	
+
+}

@@ -1,0 +1,25 @@
+
+public class GameManager {
+	private Board board;
+	private Clock clock;
+	private DirectionBoard directionBoard;
+	private int points;
+	
+	public GameManager(String name, int points, int minutes, int seconds){
+		this.points = points;
+		this.board = new Board(new Player(name),7,5);
+		this.clock = new Clock(minutes, seconds);
+		this.directionBoard = new DirectionBoard(5);
+	}
+	
+	public void initialize(){
+		
+	}
+	
+	public void movePlayer(int x, int y){
+		if(this.board.inBoundary(x, y)){
+			this.board.getPlayer().setX(x);
+			this.board.getPlayer().setY(y);
+		}
+	}
+}

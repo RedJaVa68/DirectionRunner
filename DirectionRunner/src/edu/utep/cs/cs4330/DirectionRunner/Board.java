@@ -1,0 +1,109 @@
+package edu.utep.cs.cs4330.DirectionRunner;
+
+/**
+ * This contains everything that inside the board.
+ * The player, the cells and the size of the board.
+ * @author Jacob Valdiviez
+ *
+ */
+public class Board {
+	/**
+	 * This contains the cells
+	 * @see Cell
+	 */
+	private Cell[][] cells;
+	/**
+	 * This contains the amount of rows in a board
+	 */
+	private int rows;
+	/**
+	 * This contains the amount of columns in a board
+	 */
+	private int columns;
+	/**
+	 * This contains the player located in the board
+	 * @see Player
+	 */
+	private Player player;
+	/**
+	 * This instantiates the board given a player, the amount of rows
+	 * and the amount of columns of the board
+	 * @param player
+	 * @param rows
+	 * @param columns
+	 * @see Player
+	 */
+	public Board(Player player, int rows, int columns){
+		this.cells = new Cell[rows][columns];
+		this.rows = rows;
+		this.columns = columns;
+		this.player = player;
+	}
+	/**
+	 * This checks if a coordinate is inside the board
+	 * @param x coordinate
+	 * @param y coordinate
+	 * @return boolean
+	 */
+	public boolean inBoundary(int x, int y){
+		if(x >= 0 && x <= this.rows && y >= 0 && y <= this.columns)
+			return true;
+		else
+			return false;
+	}
+	/**
+	 * This returns the player located in the board
+	 * @return Player
+	 * @see Player
+	 */
+	public Player getPlayer(){
+		return this.player;
+	}
+	/**
+	 * This returns the cells of the board
+	 * @return Cell[][]
+	 * @see Cell
+	 */
+	public Cell[][] getCells(){
+		return this.cells;
+	}
+	/**
+	 * This returns the amount of rows of a board
+	 * @return int
+	 */
+	public int getRows(){
+		return this.rows;
+	}
+	/**
+	 * This returns the amount of columns of a board
+	 * @return int
+	 */
+	public int getColumns(){
+		return this.columns;
+	}
+	/**
+	 * Sets the boards cells with given cells
+	 * @param cells
+	 * @see Cell
+	 */
+	public void setCells(Cell[][] cells){
+		this.cells = cells;
+	}
+	/**
+	 * Returns a cell given the x y coordinate of its location
+	 * @param x
+	 * @param y
+	 * @return Cell
+	 * @see Cell
+	 */
+	public Cell getCell(int x, int y){
+		for(int i = 0; i < this.cells.length; i ++){
+			for(int j = 0;j < this.cells[i].length; j++){
+				if(cells[i][j].getX() == x && cells[i][j].getY() == y)
+					return cells[i][j];
+			}
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,117 @@
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JPanel;
+
+/**
+ * This class contains the Direction Board UI
+ * @author Jacob Valdiviez
+ *
+ */
+public class DirectionBoardView extends JPanel implements ActionListener{
+	/**
+	 * This contains the direction board
+	 * @see DirectionBoard
+	 */
+	private DirectionBoard directionboard;
+	/**
+	 * This checks whether the class is in initialize state
+	 */
+	private boolean init;
+	/**
+	 * This contains the cells;
+	 */
+	private JButton[] cells;
+	
+	private GameManager game;
+	
+	private BoardView boardview;
+	/**
+	 * This instantiates the class with a given game
+	 * @param game
+	 * @see GameManager
+	 */
+	public DirectionBoardView(GameManager game){
+		this.game = game;
+		this.directionboard = game.getDirectionBoard();
+		this.cells = new JButton[this.directionboard.getDirections().length];
+	}
+	/**
+	 * This method initializes the Direction Board display
+	 */
+	public DirectionBoardView(GameManager game, BoardView board){
+		this.directionboard = game.getDirectionBoard();
+		this.cells = new JButton[this.directionboard.getDirections().length];
+		this.game = game;
+		this.boardview = board;
+	}
+	public void initialize(){
+		this.init = true;
+		setLayout(new GridLayout(1,this.directionboard.getDirections().length));
+		update();
+		this.init = false;
+	}
+	/**
+	 * This method updates the UI
+	 */
+	public void update(){
+		if(!init)
+			removeAll();
+		Direction[] directions = this.directionboard.getDirections();
+		for(int i = 0; i < directions.length; i++){
+			if(init){
+				cells[i] = new JButton();
+				cells[i].addActionListener(this);
+			}
+			if(directions[i].isDown())
+				cells[i].setIcon(new ImageIcon("C:\\Users\\Jacob\\Pictures\\DirectionRunnerGame\\celldown.png"));
+			if(directions[i].isLeft())
+				cells[i].setIcon(new ImageIcon("C:\\Users\\Jacob\\Pictures\\DirectionRunnerGame\\cellleft.png"));
+			if(directions[i].isRight())
+				cells[i].setIcon(new ImageIcon("C:\\Users\\Jacob\\Pictures\\DirectionRunnerGame\\cellright.png"));
+			if(directions[i].isUp())
+				cells[i].setIcon(new ImageIcon("C:\\Users\\Jacob\\Pictures\\DirectionRunnerGame\\cellup.png"));
+		}
+		print();
+	}
+	/**
+	 * This method removes all the cells from the display
+	 */
+	public void removeAll(){
+		for(int i = 0; i < cells.length;i++){
+			remove(cells[i]);
+		}
+	}
+	/**
+	 * This method adds all the cells the display
+	 */
+	public void print(){
+		for(int i = 0; i < cells.length; i++){
+			add(cells[i]);
+		}
+	}
+	/**
+	 * This method handles button clicks
+	 */
+	public void actionPerformed(ActionEvent arg0) {
+		for(int i = 0; i < cells.length; i ++){
+			if(arg0.getSource().equals(cells[i])){
+				if(directionboard.getDirection(i).isDown())
+					this.game.movePlayer(this.game.getPlayerX(), this.game.getPlayerY() - 1, i);
+				else if(directionboard.getDirection(i).isUp())
+					this.game.movePlayer(this.game.getPlayerX(), this.game.getPlayerY() + 1, i);
+				else if(directionboard.getDirection(i).isRight())
+					this.game.movePlayer(this.game.getPlayerX() + 1, this.game.getPlayerY(), i);
+				else if(directionboard.getDirection(i).isLeft())
+					this.game.movePlayer(this.game.getPlayerX() - 1, this.game.getPlayerY(), i);
+				this.boardview.setGame(game);
+				this.boardview.update();
+				update();
+			}
+		}
+		
+	}
+}

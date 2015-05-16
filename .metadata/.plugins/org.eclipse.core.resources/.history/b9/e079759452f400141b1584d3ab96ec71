@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:weightSum="3"
+    android:background="@drawable/bg">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView 
+            android:id="@+id/nameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>"
+        <TextView 
+            android:id="@+id/scoreText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Score: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
+        <TextView
+            android:id="@+id/clock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: "
+            android:textSize="20sp"
+            android:textColor="#ffffff"/>
+        
+    </LinearLayout>
+    <edu.utep.cs.cs4330.DirectionRunner.BoardView
+        android:id="@+id/boardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+        	android:id="@+id/button1"
+        	android:layout_width="60dp"
+        	android:layout_height="60dp"
+        	android:layout_margin="5dp"
+        	android:onClick="button1"/>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:onClick="button2"/>
+        <Button
+        	android:id="@+id/button3"
+        	android:layout_width="60dp"
+        	android:layout_height="60dp"
+        	android:layout_margin="5dp"
+        	android:onClick="button3"/>
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:onClick="button4"/>
+        <Button
+        	android:id="@+id/button5"
+        	android:layout_width="60dp"
+        	android:layout_height="60dp"
+        	android:layout_margin="5dp"
+        	android:onClick="button5"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Over"
+            android:background="#00F5FF"
+            android:onClick="reset"
+            android:layout_margin="5dp"/>
+    	<Button
+        	android:id="@+id/quit"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content"
+        	android:text="Quit"
+        	android:background="#00F5FF"
+       	    android:onClick="quit"
+       	    android:layout_margin="5dp"/>        
+        
+        
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

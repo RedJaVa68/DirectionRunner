@@ -1,0 +1,140 @@
+import java.util.Random;
+
+/**
+ * This class manages the game
+ * @author Jacob Valdiviez
+ *
+ */
+public class GameManager {
+	/**
+	 * This field contains the board
+	 * @see Board
+	 */
+	private Board board;
+	/**
+	 * This field contains the clock
+	 * @see Clock
+	 */
+	private Clock clock;
+	/**
+	 * This field contains the direction board
+	 * @see DirectionBoard
+	 */
+	private DirectionBoard directionBoard;
+	/**
+	 * This instantiates the class with a given name amount of minutes and seconds
+	 * left to start the game.
+	 * @param name
+	 * @param minutes
+	 * @param seconds
+	 */
+	public GameManager(String name, int minutes, int seconds){
+		this.board = new Board(new Player(name),7,5);
+		this.clock = new Clock(minutes, seconds);
+		this.directionBoard = new DirectionBoard(5);
+	}
+	/**
+	 * This method intializes the game
+	 */
+	public void initialize(){
+		Thread clockThread = new Thread(clock);
+		AnswerKey answerKey = new AnswerKey();
+		Cell[] pathToWin = answerKey.getRandomKey();
+		Cell[][] newCells = new Cell[this.board.getRows()][this.board.getColumns()];
+		for(int i = 0; i < newCells.length; i ++){
+			for(int j = 0; j < newCells[i].length; j ++){
+				Random rand = new Random();
+				int number = rand.nextInt(4);
+				boolean dontContinue = false;
+				for(int k = 0; k < pathToWin.length; k ++){
+					if(pathToWin[k].getX() == i && pathToWin[k].getY() == j){
+						newCells[i][j] = pathToWin[k];
+						dontContinue = true;
+						break;
+					}
+				}
+				if(!dontContinue){
+					if(number == 0)
+						newCells[i][j] = new Cell(new Direction(true,false,false,false),i,j);
+					else if(number == 1)
+						newCells[i][j] = new Cell(new Direction(false,true,false,false),i,j);
+					else if(number == 2)
+						newCells[i][j] = new Cell(new Direction(false,false,true,false),i,j);
+					else
+						newCells[i][j] = new Cell(new Direction(false,false,false,true),i,j);
+				}
+			}
+		}
+		this.board.setCells(newCells);
+		this.directionBoard.setDirection(this.board.getCell(0, 0).getDirection(), 0);
+		for(int i = 1;i < this.directionBoard.getDirections().length; i++){
+			Random rand = new Random();
+			int number = rand.nextInt(4);
+			if(number == 0)
+				this.directionBoard.setDirection(new Direction(true,false,false,false), i);
+			else if(number == 1)
+				this.directionBoard.setDirection(new Direction(false,true,false,false), i);
+			else if(number == 2)
+				this.directionBoard.setDirection(new Direction(false,false,true,false), i);
+			else
+				this.directionBoard.setDirection(new Direction(false,false,false,true), i);
+		}
+		clockThread.start();
+	}
+	/**
+	 * This method moves the player inside the board
+	 * @param x
+	 * @param y
+	 * @param directionBoardIndex
+	 * @see DirectionBoard
+	 * @see Board
+	 */
+	public void movePlayer(int x, int y, int directionBoardIndex){
+		if(this.board.inBoundary(x, y)){
+			this.board.getPlayer().setX(x);
+			this.board.getPlayer().setY(y);
+			
+			this.directionBoard.setDirection(this.board.getCell(x, y).getDirection(), directionBoardIndex);
+		}
+	}
+	/**
+	 * This returns the x coordinate of the players location
+	 * @see Player
+	 * @return int
+	 */
+	public int getPlayerX(){
+		return this.board.getPlayer().getX();
+	}
+	/**
+	 * This returns the y coordinate of the players location
+	 * @return int
+	 * @see Player
+	 */
+	public int getPlayerY(){
+		return this.board.getPlayer().getY();
+	}
+	/**
+	 * This returns the board
+	 * @return Board
+	 * @see Board
+	 */
+	public Board getBoard(){
+		return this.board;
+	}
+	/**
+	 * This returns the clock
+	 * @return Clock
+	 * @see Clock
+	 */
+	public Clock getClock(){
+		return this.clock;
+	}
+	/**
+	 * This returns the direction board
+	 * @return DirectionBoard
+	 * @see DirectionBoard
+	 */
+	public DirectionBoard getDirectionBoard(){
+		return this.directionBoard;
+	}
+}

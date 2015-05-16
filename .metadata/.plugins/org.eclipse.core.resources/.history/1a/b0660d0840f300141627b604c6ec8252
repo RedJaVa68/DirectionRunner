@@ -1,0 +1,20 @@
+/**
+ * This class contains the Direction Board UI
+ * @author Jacob Valdiviez
+ *
+ */
+public class DirectionBoardView extends JPanel{
+	/**
+	 * This contains the game
+	 * @see GameManager
+	 */
+	private GameManager game;
+	/**
+	 * This instantiates the class with a given game
+	 * @param game
+	 * @see GameManager
+	 */
+	public DirectionBoardView(GameManager game){
+		this.game = game;
+	}
+}

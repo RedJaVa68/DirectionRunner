@@ -1,0 +1,12 @@
+package edu.utep.cs.cs4330.DirectionRunner;
+
+import android.content.Context;
+import android.widget.Button;
+
+public class DirectionButton extends Button{
+
+	public DirectionButton(Context context) {
+		super(context);
+	}
+
+}

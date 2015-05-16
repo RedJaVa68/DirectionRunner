@@ -1,0 +1,15 @@
+package UI;
+
+import java.awt.Container;
+/**
+ * This class contains the Board UI
+ * @author Jacob Valdiviez
+ *
+ */
+public class BoardView extends Container{
+	JButton[][] cellButtons;
+	public BoardView(int rows, int collumns){
+		
+	}
+
+}

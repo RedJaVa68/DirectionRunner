@@ -1,0 +1,15 @@
+/**
+ * This class contains the Direction Board UI
+ * @author Jacob Valdiviez
+ *
+ */
+public class DirectionBoardView {
+	/**
+	 * This contains the game
+	 * @see GameManager
+	 */
+	private GameManager game;
+	public DirectionBoardView(GameManager game){
+		
+	}
+}

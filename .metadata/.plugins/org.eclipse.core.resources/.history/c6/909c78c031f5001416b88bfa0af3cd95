@@ -1,0 +1,90 @@
+package edu.utep.cs.cs4330.DirectionRunner;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class StatsActivity extends ActionBarActivity{
+	TextView text1;
+	TextView text2;
+	TextView text3;
+	TextView text4;
+	TextView text5;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.stats_activity);
+        List<String> highscores = readHighscores();
+        text1 = (TextView)findViewById(R.id.text1);
+        text2 = (TextView)findViewById(R.id.text2);
+        text3 = (TextView)findViewById(R.id.text3);
+        text4 = (TextView)findViewById(R.id.text4);
+        text5 = (TextView)findViewById(R.id.text5);
+        TextView[] textViews= {text1,text2,text3,text4,text5};
+        for(int i = 0; i < highscores.size();i++){
+        	textViews[i].setText(highscores.get(i));
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public List<String> readHighscores(){
+    	List<String> highscores = new ArrayList<String>();
+    	try{
+    		FileInputStream foi = openFileInput("highscores.txt");
+    		BufferedReader br = new BufferedReader(new InputStreamReader(foi));
+    		String line;
+    		while((line = br.readLine()) != null){
+    			highscores.add(line);
+    		}
+    	}catch(Exception e){}
+    	/*
+    	List<String> highscores = new ArrayList<String>();
+    	try{
+    		File file = new File(((Context)this).getExternalFilesDir(null), "highscores.txt");
+    		if(!file.exists())
+    			file.createNewFile();
+    		BufferedReader reader = new BufferedReader(new FileReader(file));
+    		String line;
+    		while((line = reader.readLine()) != null){
+    			highscores.add(line);
+    		}
+    		reader.close();
+    	}catch(Exception e){}*/
+    	return highscores;
+    }
+    public void back(View view){
+    	Intent intent = new Intent(this,MainActivity.class);
+    	startActivity(intent);
+    }
+}
